@@ -1,0 +1,2 @@
+# SfPlayground
+Syncfusion Blazor playground
