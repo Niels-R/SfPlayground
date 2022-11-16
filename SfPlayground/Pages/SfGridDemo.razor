@@ -1,0 +1,50 @@
+﻿@using SfPlayground.Models;
+@using Syncfusion.Blazor.Buttons
+@using Syncfusion.Blazor.Grids
+
+@page "/sfgrid"
+
+<PageTitle>SfGrid</PageTitle>
+
+<SfButton Content="Save state"
+          OnClick="OnSaveStateClickedAsync" />
+<SfButton Content="Load state"
+          Disabled="@(string.IsNullOrEmpty(_savedState))"
+          OnClick="OnLoadStateClicked" />
+<SfButton Content="Reset"
+          OnClick="OnResetClickedAsync" />
+
+<SfButton Content="Load state from JSON"
+          OnClick="OnLoadStateFromJsonClicked" />
+
+<hr />
+
+<SfGrid @ref="_grid"
+        TValue="WeatherForecast"
+        AllowReordering="true"
+        AllowResizing="true"
+        AllowSorting="true"
+        DataSource="_forecasts"
+        EnablePersistence="true"
+        Height="100%"
+        Width="100%">
+    <GridColumns>
+        <GridColumn Field="@nameof(WeatherForecast.Date)" />
+        <GridColumn Field="@nameof(WeatherForecast.TemperatureC)" />
+        <GridColumn Field="@nameof(WeatherForecast.TemperatureF)" />
+        <GridColumn Field="@nameof(WeatherForecast.Summary)" />
+    </GridColumns>
+</SfGrid>
+
+<hr />
+
+<div style="word-break:break-all">
+    @if (string.IsNullOrEmpty(_savedState))
+    {
+        @("No grid state saved (yet)...")
+    }
+    else
+    {
+        @(_savedState)
+    }
+</div>
