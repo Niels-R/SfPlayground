@@ -62,3 +62,8 @@ a, .btn-link {
     .blazor-error-boundary::after {
         content: "An error has occurred."
     }
+
+/* SfHierarchyGridDemo */
+.e-detail-disable .e-detailrowcollapse .e-icon-grightarrow {
+    visibility: hidden;
+}

@@ -1,0 +1,126 @@
+﻿@using SfPlayground.Models;
+@using Syncfusion.Blazor.Buttons
+@using Syncfusion.Blazor.Grids
+
+@page "/sfhierarchygrid"
+
+<PageTitle>SfGrid with hierarchy</PageTitle>
+
+<SfButton Content="Save state"
+          OnClick="OnSaveStateClickedAsync" />
+<SfButton Content="Load state"
+          Disabled="@(string.IsNullOrEmpty(_savedState))"
+          OnClick="OnLoadStateClicked" />
+<SfButton Content="Reset"
+          OnClick="OnResetClickedAsync" />
+<SfButton Content="Load state from JSON"
+          OnClick="OnLoadStateFromJsonClicked" />
+
+<hr />
+
+<SfGrid @ref="_grid"
+        TValue="Property"
+        AllowPaging="true"
+        AllowReordering="true"
+        AllowResizing="true"
+        AllowSorting="true"
+        DataSource="_mainProperties"
+        EnablePersistence="true"
+        ShowColumnChooser="true"
+        Toolbar="@(new List<string>() {"ColumnChooser"})"
+        Height="800"
+        Width="100%">
+    <GridColumns>
+        <GridColumn Field="@nameof(Property.PropertyAutoId)" />
+        <GridColumn Field="@nameof(Property.Reference)" />
+        <GridColumn Field="@nameof(Property.Transaction)" />
+        <GridColumn Field="@nameof(Property.TypeId)" />
+        <GridColumn Field="@nameof(Property.Type)" />
+        <GridColumn Field="@nameof(Property.Availability)" />
+        <GridColumn Field="@nameof(Property.ConstructionYear)" Visible="false" />
+        <GridColumn Field="@nameof(Property.BuildingType)" Visible="false" />
+        <GridColumn Field="@nameof(Property.Street)" Visible="false" />
+        <GridColumn Field="@nameof(Property.Number)" Visible="false" />
+        <GridColumn Field="@nameof(Property.Box)" Visible="false" />
+        <GridColumn Field="@nameof(Property.FileAdministrator)" Visible="false" />
+        <GridColumn Field="@nameof(Property.Office)" Visible="false" />
+        <GridColumn Field="@nameof(Property.Owner)" Visible="false" />
+        <GridColumn Field="@nameof(Property.Renter)" Visible="false" />
+        <GridColumn Field="@nameof(Property.Buyer)" Visible="false" />
+        <GridColumn Field="@nameof(Property.Development)" Visible="false" />
+        <GridColumn Field="@nameof(Property.Investment)" Visible="false" />
+        <GridColumn Field="@nameof(Property.Poster)" Visible="false" />
+        <GridColumn Field="@nameof(Property.Bedrooms)" Visible="false" />
+        <GridColumn Field="@nameof(Property.Key)" Visible="false" />
+        <GridColumn Field="@nameof(Property.Status)" Visible="false" />
+        <GridColumn Field="@nameof(Property.ResponsibleSalesRep)" Visible="false" />
+        <GridColumn Field="@nameof(Property.Archived)" Visible="false" />
+        <GridColumn Field="@nameof(Property.Show)" Visible="false" />
+        <GridColumn Field="@nameof(Property.Flag)" Visible="false" />
+        <GridColumn Field="@nameof(Property.ProjectPropertyAutoId)" Visible="false" />
+        <GridColumn Field="@nameof(Property.ProjectReference)" Visible="false" />
+        <GridColumn Field="@nameof(Property.Creation)" Visible="false" />
+        <GridColumn Field="@nameof(Property.Modified)" Visible="false" />
+    </GridColumns>
+    <GridEvents RowDataBound="OnRowDataBound" TValue="Property" />
+    <GridPageSettings PageSize="50" />
+    <GridTemplates>
+        <DetailTemplate>
+            @{
+                var property = (context as Property);
+
+                if (property?.TypeId == 21)
+                {
+                    <SfGrid DataSource="GetProjectProperties(property.PropertyAutoId)"
+                    TValue="Property">
+                        <GridColumns>
+                            <GridColumn Field="@nameof(Property.PropertyAutoId)" />
+                            <GridColumn Field="@nameof(Property.Reference)" />
+                            <GridColumn Field="@nameof(Property.Transaction)" />
+                            <GridColumn Field="@nameof(Property.TypeId)" />
+                            <GridColumn Field="@nameof(Property.Type)" />
+                            <GridColumn Field="@nameof(Property.Availability)" />
+                            <GridColumn Field="@nameof(Property.ConstructionYear)" Visible="false" />
+                            <GridColumn Field="@nameof(Property.BuildingType)" Visible="false" />
+                            <GridColumn Field="@nameof(Property.Street)" Visible="false" />
+                            <GridColumn Field="@nameof(Property.Number)" Visible="false" />
+                            <GridColumn Field="@nameof(Property.Box)" Visible="false" />
+                            <GridColumn Field="@nameof(Property.FileAdministrator)" Visible="false" />
+                            <GridColumn Field="@nameof(Property.Office)" Visible="false" />
+                            <GridColumn Field="@nameof(Property.Owner)" Visible="false" />
+                            <GridColumn Field="@nameof(Property.Renter)" Visible="false" />
+                            <GridColumn Field="@nameof(Property.Buyer)" Visible="false" />
+                            <GridColumn Field="@nameof(Property.Development)" Visible="false" />
+                            <GridColumn Field="@nameof(Property.Investment)" Visible="false" />
+                            <GridColumn Field="@nameof(Property.Poster)" Visible="false" />
+                            <GridColumn Field="@nameof(Property.Bedrooms)" Visible="false" />
+                            <GridColumn Field="@nameof(Property.Key)" Visible="false" />
+                            <GridColumn Field="@nameof(Property.Status)" Visible="false" />
+                            <GridColumn Field="@nameof(Property.ResponsibleSalesRep)" Visible="false" />
+                            <GridColumn Field="@nameof(Property.Archived)" Visible="false" />
+                            <GridColumn Field="@nameof(Property.Show)" Visible="false" />
+                            <GridColumn Field="@nameof(Property.Flag)" Visible="false" />
+                            <GridColumn Field="@nameof(Property.ProjectPropertyAutoId)" Visible="false" />
+                            <GridColumn Field="@nameof(Property.ProjectReference)" Visible="false" />
+                            <GridColumn Field="@nameof(Property.Creation)" Visible="false" />
+                            <GridColumn Field="@nameof(Property.Modified)" Visible="false" />
+                        </GridColumns>
+                    </SfGrid>
+                }
+            }
+        </DetailTemplate>
+    </GridTemplates>
+</SfGrid>
+
+<hr />
+
+<div style="word-break:break-all">
+    @if (string.IsNullOrEmpty(_savedState))
+    {
+        @("No grid state saved (yet)...")
+    }
+    else
+    {
+        @(_savedState)
+    }
+</div>
