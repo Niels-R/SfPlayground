@@ -16,35 +16,15 @@ public partial class SfHierarchyGridDemo
 
     protected override async Task OnInitializedAsync()
     {
-        _properties = await Http!.GetFromJsonAsync<List<Property>>("sample-data/properties.json") ?? new List<Property>();
+        _properties = await Http!.GetFromJsonAsync<List<Property>>($"sample-data/properties.json?{Guid.NewGuid()}") ?? new List<Property>();
         _mainProperties = _properties.Where(p => p.ProjectPropertyAutoId == null).ToList();
 
         base.OnInitialized();
     }
 
-    private List<Property> GetProjectProperties(long projectPropertyAutoId)
-    {
-        return _properties.Where(p => p.ProjectPropertyAutoId == projectPropertyAutoId).ToList();
-    }
-
     private void OnActionCompleted(ActionEventArgs<Property> args)
     {
         Console.WriteLine($"OnActionCompleted {args.RequestType}");
-    }
-
-    private void OnDetailDataBound(DetailDataBoundEventArgs<Property> args)
-    {
-        Console.WriteLine($"OnDetailDataBound {args.DetailElement?.ID}");
-    }
-
-    private void OnSubGridLoaded(object args)
-    {
-        Console.WriteLine($"OnSubGridLoaded {args}");
-    }
-
-    private void OnSubGridCreated(object args)
-    {
-        Console.WriteLine($"OnSubGridCreated {args}");
     }
 
     private async Task OnLoadStateClicked()

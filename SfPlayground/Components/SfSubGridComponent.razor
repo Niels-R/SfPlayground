@@ -1,38 +1,14 @@
-﻿@using SfPlayground.Components
-@using SfPlayground.Models;
-@using Syncfusion.Blazor.Buttons
+﻿@using SfPlayground.Models;
+@using Syncfusion.Blazor
+@using Syncfusion.Blazor.Data
 @using Syncfusion.Blazor.Grids
 
-@page "/sfhierarchygrid"
-
-<PageTitle>SfGrid with hierarchy</PageTitle>
-
-<SfButton Content="Save state"
-          OnClick="OnSaveStateClickedAsync" />
-<SfButton Content="Load state"
-          Disabled="@(string.IsNullOrEmpty(_savedState))"
-          OnClick="OnLoadStateClicked" />
-<SfButton Content="Reset"
-          OnClick="OnResetClickedAsync" />
-<SfButton Content="Load state from JSON"
-          OnClick="OnLoadStateFromJsonClicked" />
-
-<hr />
-
-<SfGrid @ref="_grid"
-        TValue="Property"
-        AllowFiltering="true"
-        AllowReordering="true"
+<SfGrid AllowReordering="true"
         AllowResizing="true"
         AllowSorting="true"
-        DataSource="_mainProperties"
+        DataSource="ProjectProperties"
         EnablePersistence="true"
-        EnableVirtualization="true"
-        EnableVirtualMaskRow
-        ShowColumnChooser="true"
-        Toolbar="@(new List<string>() {"ColumnChooser"})"
-        Height="800"
-        Width="100%">
+        TValue="Property">
     <GridColumns>
         <GridColumn Field="@nameof(Property.PropertyAutoId)" />
         <GridColumn Field="@nameof(Property.Reference)" />
@@ -65,7 +41,7 @@
         <GridColumn Field="@nameof(Property.Creation)" Visible="false" />
         <GridColumn Field="@nameof(Property.Modified)" Visible="false" />
     </GridColumns>
-    <GridEvents OnActionComplete="OnActionCompleted"
+    <GridEvents OnLoad="OnLoadEventHandler"
                 RowDataBound="OnRowDataBound"
                 TValue="Property" />
     <GridTemplates>
@@ -76,22 +52,9 @@
                 if (property?.TypeId == 21)
                 {
                     <SfSubGridComponent ProjectPropertyAutoId="property.PropertyAutoId"
-                                Properties="_properties" />
+                                Properties="Properties" />
                 }
             }
         </DetailTemplate>
     </GridTemplates>
 </SfGrid>
-
-<hr />
-
-<div style="word-break:break-all">
-    @if (string.IsNullOrEmpty(_savedState))
-    {
-        @("No grid state saved (yet)...")
-    }
-    else
-    {
-        @(_savedState)
-    }
-</div>

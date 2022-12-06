@@ -1,18 +1,24 @@
 <Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
 
 	<PropertyGroup>
-		<TargetFramework>net6.0</TargetFramework>
+		<TargetFramework>net7.0</TargetFramework>
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.10" />
-		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.10" PrivateAssets="all" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="7.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="7.0.0" PrivateAssets="all" />
 		<PackageReference Include="Syncfusion.Blazor.Core" Version="20.1.0.61" />
 		<PackageReference Include="Syncfusion.Blazor.Grid" Version="20.1.0.61" />
 		<PackageReference Include="Syncfusion.Blazor.RichTextEditor" Version="20.1.0.61" />
 		<PackageReference Include="Syncfusion.Blazor.Themes" Version="20.1.0.61" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Update="wwwroot\sample-data\properties.json">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
 	</ItemGroup>
 
 </Project>
