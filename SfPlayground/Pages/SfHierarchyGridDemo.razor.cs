@@ -27,6 +27,26 @@ public partial class SfHierarchyGridDemo
         return _properties.Where(p => p.ProjectPropertyAutoId == projectPropertyAutoId).ToList();
     }
 
+    private void OnActionCompleted(ActionEventArgs<Property> args)
+    {
+        Console.WriteLine($"OnActionCompleted {args.RequestType}");
+    }
+
+    private void OnDetailDataBound(DetailDataBoundEventArgs<Property> args)
+    {
+        Console.WriteLine($"OnDetailDataBound {args.DetailElement?.ID}");
+    }
+
+    private void OnSubGridLoaded(object args)
+    {
+        Console.WriteLine($"OnSubGridLoaded {args}");
+    }
+
+    private void OnSubGridCreated(object args)
+    {
+        Console.WriteLine($"OnSubGridCreated {args}");
+    }
+
     private async Task OnLoadStateClicked()
     {
         if (_grid != null && !string.IsNullOrEmpty(_savedState))

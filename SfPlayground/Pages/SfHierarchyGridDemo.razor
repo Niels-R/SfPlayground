@@ -20,12 +20,13 @@
 
 <SfGrid @ref="_grid"
         TValue="Property"
-        AllowPaging="true"
         AllowReordering="true"
         AllowResizing="true"
         AllowSorting="true"
         DataSource="_mainProperties"
         EnablePersistence="true"
+        EnableVirtualization="true"
+        EnableVirtualMaskRow
         ShowColumnChooser="true"
         Toolbar="@(new List<string>() {"ColumnChooser"})"
         Height="800"
@@ -47,23 +48,25 @@
         <GridColumn Field="@nameof(Property.Owner)" Visible="false" />
         <GridColumn Field="@nameof(Property.Renter)" Visible="false" />
         <GridColumn Field="@nameof(Property.Buyer)" Visible="false" />
-        <GridColumn Field="@nameof(Property.Development)" Visible="false" />
-        <GridColumn Field="@nameof(Property.Investment)" Visible="false" />
-        <GridColumn Field="@nameof(Property.Poster)" Visible="false" />
+        <GridColumn Field="@nameof(Property.Development)" DisplayAsCheckBox="true" Visible="false" />
+        <GridColumn Field="@nameof(Property.Investment)" DisplayAsCheckBox="true" Visible="false" />
+        <GridColumn Field="@nameof(Property.Poster)" DisplayAsCheckBox="true" Visible="false" />
         <GridColumn Field="@nameof(Property.Bedrooms)" Visible="false" />
         <GridColumn Field="@nameof(Property.Key)" Visible="false" />
         <GridColumn Field="@nameof(Property.Status)" Visible="false" />
         <GridColumn Field="@nameof(Property.ResponsibleSalesRep)" Visible="false" />
-        <GridColumn Field="@nameof(Property.Archived)" Visible="false" />
-        <GridColumn Field="@nameof(Property.Show)" Visible="false" />
+        <GridColumn Field="@nameof(Property.Archived)" DisplayAsCheckBox="true" Visible="false" />
+        <GridColumn Field="@nameof(Property.Show)" DisplayAsCheckBox="true" Visible="false" />
         <GridColumn Field="@nameof(Property.Flag)" Visible="false" />
         <GridColumn Field="@nameof(Property.ProjectPropertyAutoId)" Visible="false" />
         <GridColumn Field="@nameof(Property.ProjectReference)" Visible="false" />
         <GridColumn Field="@nameof(Property.Creation)" Visible="false" />
         <GridColumn Field="@nameof(Property.Modified)" Visible="false" />
     </GridColumns>
-    <GridEvents RowDataBound="OnRowDataBound" TValue="Property" />
-    <GridPageSettings PageSize="50" />
+    <GridEvents DetailDataBound="OnDetailDataBound"
+                OnActionComplete="OnActionCompleted"
+                RowDataBound="OnRowDataBound"
+                TValue="Property" />
     <GridTemplates>
         <DetailTemplate>
             @{
@@ -71,7 +74,11 @@
 
                 if (property?.TypeId == 21)
                 {
-                    <SfGrid DataSource="GetProjectProperties(property.PropertyAutoId)"
+                    <SfGrid AllowReordering="true"
+                    AllowResizing="true"
+                    AllowSorting="true"
+                    DataSource="GetProjectProperties(property.PropertyAutoId)"
+                    EnablePersistence="true"
                     TValue="Property">
                         <GridColumns>
                             <GridColumn Field="@nameof(Property.PropertyAutoId)" />
@@ -90,21 +97,24 @@
                             <GridColumn Field="@nameof(Property.Owner)" Visible="false" />
                             <GridColumn Field="@nameof(Property.Renter)" Visible="false" />
                             <GridColumn Field="@nameof(Property.Buyer)" Visible="false" />
-                            <GridColumn Field="@nameof(Property.Development)" Visible="false" />
-                            <GridColumn Field="@nameof(Property.Investment)" Visible="false" />
-                            <GridColumn Field="@nameof(Property.Poster)" Visible="false" />
+                            <GridColumn Field="@nameof(Property.Development)" DisplayAsCheckBox="true" Visible="false" />
+                            <GridColumn Field="@nameof(Property.Investment)" DisplayAsCheckBox="true" Visible="false" />
+                            <GridColumn Field="@nameof(Property.Poster)" DisplayAsCheckBox="true" Visible="false" />
                             <GridColumn Field="@nameof(Property.Bedrooms)" Visible="false" />
                             <GridColumn Field="@nameof(Property.Key)" Visible="false" />
                             <GridColumn Field="@nameof(Property.Status)" Visible="false" />
                             <GridColumn Field="@nameof(Property.ResponsibleSalesRep)" Visible="false" />
-                            <GridColumn Field="@nameof(Property.Archived)" Visible="false" />
-                            <GridColumn Field="@nameof(Property.Show)" Visible="false" />
+                            <GridColumn Field="@nameof(Property.Archived)" DisplayAsCheckBox="true" Visible="false" />
+                            <GridColumn Field="@nameof(Property.Show)" DisplayAsCheckBox="true" Visible="false" />
                             <GridColumn Field="@nameof(Property.Flag)" Visible="false" />
                             <GridColumn Field="@nameof(Property.ProjectPropertyAutoId)" Visible="false" />
                             <GridColumn Field="@nameof(Property.ProjectReference)" Visible="false" />
                             <GridColumn Field="@nameof(Property.Creation)" Visible="false" />
                             <GridColumn Field="@nameof(Property.Modified)" Visible="false" />
                         </GridColumns>
+                        <GridEvents OnLoad="OnSubGridLoaded"
+                            Created="OnSubGridCreated"
+                            TValue="Property" />
                     </SfGrid>
                 }
             }
