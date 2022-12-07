@@ -3,7 +3,8 @@
 @using Syncfusion.Blazor.Data
 @using Syncfusion.Blazor.Grids
 
-<SfGrid AllowReordering="true"
+<SfGrid @ref="_grid"
+        AllowReordering="true"
         AllowResizing="true"
         AllowSorting="true"
         DataSource="ProjectProperties"
@@ -41,7 +42,7 @@
         <GridColumn Field="@nameof(Property.Creation)" Visible="false" />
         <GridColumn Field="@nameof(Property.Modified)" Visible="false" />
     </GridColumns>
-    <GridEvents OnLoad="OnLoadEventHandler"
+    <GridEvents OnLoad="OnLoadEventHandlerAsync"
                 RowDataBound="OnRowDataBound"
                 TValue="Property" />
     <GridTemplates>
@@ -51,7 +52,8 @@
 
                 if (property?.TypeId == 21)
                 {
-                    <SfSubGridComponent ProjectPropertyAutoId="property.PropertyAutoId"
+                    <SfSubGridComponent ParentGridState="@ParentGridState"
+                                ProjectPropertyAutoId="property.PropertyAutoId"
                                 Properties="Properties" />
                 }
             }

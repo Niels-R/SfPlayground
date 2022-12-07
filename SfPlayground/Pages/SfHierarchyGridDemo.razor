@@ -7,15 +7,8 @@
 
 <PageTitle>SfGrid with hierarchy</PageTitle>
 
-<SfButton Content="Save state"
-          OnClick="OnSaveStateClickedAsync" />
-<SfButton Content="Load state"
-          Disabled="@(string.IsNullOrEmpty(_savedState))"
-          OnClick="OnLoadStateClicked" />
 <SfButton Content="Reset"
           OnClick="OnResetClickedAsync" />
-<SfButton Content="Load state from JSON"
-          OnClick="OnLoadStateFromJsonClicked" />
 
 <hr />
 
@@ -75,7 +68,8 @@
 
                 if (property?.TypeId == 21)
                 {
-                    <SfSubGridComponent ProjectPropertyAutoId="property.PropertyAutoId"
+                    <SfSubGridComponent ParentGridState="@_gridState"
+                                ProjectPropertyAutoId="property.PropertyAutoId"
                                 Properties="_properties" />
                 }
             }
@@ -86,12 +80,12 @@
 <hr />
 
 <div style="word-break:break-all">
-    @if (string.IsNullOrEmpty(_savedState))
+    @if (string.IsNullOrEmpty(_gridState))
     {
         @("No grid state saved (yet)...")
     }
     else
     {
-        @(_savedState)
+        @(_gridState)
     }
 </div>

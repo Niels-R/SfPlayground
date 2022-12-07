@@ -2,17 +2,18 @@
 using Microsoft.AspNetCore.Components;
 using SfPlayground.Models;
 using Syncfusion.Blazor.Grids;
+using Action = Syncfusion.Blazor.Grids.Action;
 
 namespace SfPlayground.Pages;
 
 public partial class SfHierarchyGridDemo
 {
-    [Inject] private HttpClient? Http { get; set; }
+    [Inject] private HttpClient Http { get; set; }
 
     private List<Property> _mainProperties = new();
     private List<Property> _properties = new();
     private SfGrid<Property>? _grid;
-    private string? _savedState;
+    private string? _gridState;
 
     protected override async Task OnInitializedAsync()
     {
@@ -22,28 +23,13 @@ public partial class SfHierarchyGridDemo
         base.OnInitialized();
     }
 
-    private void OnActionCompleted(ActionEventArgs<Property> args)
+    private async Task OnActionCompleted(ActionEventArgs<Property> args)
     {
-        Console.WriteLine($"OnActionCompleted {args.RequestType}");
-    }
+        var actions = new List<Action> { Action.ColumnState, Action.Reorder };
 
-    private async Task OnLoadStateClicked()
-    {
-        if (_grid != null && !string.IsNullOrEmpty(_savedState))
+        if (actions.Contains(args.RequestType))
         {
-            await _grid.SetPersistDataAsync(_savedState);
-            StateHasChanged();
-        }
-    }
-
-    private async Task OnLoadStateFromJsonClicked()
-    {
-        if (_grid != null)
-        {
-            var gridState = await Http!.GetStringAsync("sample-data/gridstate.json") ?? null;
-
-            await _grid.SetPersistDataAsync(gridState);
-            StateHasChanged();
+            _gridState = await _grid!.GetPersistDataAsync();
         }
     }
 
@@ -52,6 +38,7 @@ public partial class SfHierarchyGridDemo
         if (_grid != null)
         {
             await _grid.ResetPersistDataAsync();
+            _gridState = null;
             StateHasChanged();
         }
     }
@@ -61,14 +48,6 @@ public partial class SfHierarchyGridDemo
         if (args.Data?.TypeId != 21 || !_properties.Any(p => p.ProjectPropertyAutoId == args.Data.PropertyAutoId))
         {
             args.Row.AddClass(new string[] { "e-detail-disable" });
-        }
-    }
-
-    private async Task OnSaveStateClickedAsync()
-    {
-        if (_grid != null)
-        {
-            _savedState = await _grid.GetPersistDataAsync();
         }
     }
 }
