@@ -20,7 +20,7 @@ public partial class SfHierarchyGridDemo
         _properties = await Http!.GetFromJsonAsync<List<Property>>($"sample-data/properties.json?{Guid.NewGuid()}") ?? new List<Property>();
         _mainProperties = _properties.Where(p => p.ProjectPropertyAutoId == null).ToList();
 
-        base.OnInitialized();
+        await base.OnInitializedAsync();
     }
 
     private async Task OnActionCompleted(ActionEventArgs<Property> args)
@@ -45,7 +45,7 @@ public partial class SfHierarchyGridDemo
 
     private void OnRowDataBound(RowDataBoundEventArgs<Property> args)
     {
-        if (args.Data?.TypeId != 21 || !_properties.Any(p => p.ProjectPropertyAutoId == args.Data.PropertyAutoId))
+        if (args.Data?.TypeId != 21 || _properties.All(p => p.ProjectPropertyAutoId != args.Data.PropertyAutoId))
         {
             args.Row.AddClass(new string[] { "e-detail-disable" });
         }

@@ -46,9 +46,9 @@ public partial class SfSubGridComponent : ComponentBase
 
     private void OnRowDataBound(RowDataBoundEventArgs<Property> args)
     {
-        if (args.Data?.TypeId != 21 || !Properties.Any(p => p.ProjectPropertyAutoId == args.Data.PropertyAutoId))
+        if (args.Data?.TypeId != 21 || Properties.All(p => p.ProjectPropertyAutoId != args.Data.PropertyAutoId))
         {
-            args.Row.AddClass(new string[] { "e-detail-disable" });
+            args.Row.AddClass(new[] { "e-detail-disable" });
         }
     }
 }
