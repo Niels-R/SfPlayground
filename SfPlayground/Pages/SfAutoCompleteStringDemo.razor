@@ -1,0 +1,26 @@
+﻿@page "/sfautocompletestring"
+
+@using SfPlayground.Models
+@using Syncfusion.Blazor.DropDowns
+@using Syncfusion.Blazor.Buttons
+
+<PageTitle>SfAutoComplete</PageTitle>
+
+<SfAutoComplete @bind-Value="_value"
+                DataSource="_countries"
+                TItem="Country"
+                TValue="string">
+    <AutoCompleteFieldSettings Text="@nameof(Country.Name)"
+                               Value="@nameof(Country.Code)"/>
+</SfAutoComplete>
+
+<hr/>
+
+<SfButton
+    @onclick="OnClick">
+    Set Belgium
+</SfButton>
+
+<div>
+    Value: @($"{_value}")
+</div>
