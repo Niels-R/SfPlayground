@@ -1,4 +1,4 @@
-namespace SfPlayground.Models;
+namespace SfPlayground.Common.Models;
 
 public class Country
 {

@@ -1,7 +1,7 @@
 ﻿using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace SfPlayground.Helpers;
+namespace SfPlayground.Common.Helpers;
 
 public class BitBoolJsonConverter : JsonConverter<bool>
 {

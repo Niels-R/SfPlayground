@@ -1,6 +1,4 @@
-﻿using SfPlayground.Models;
-
-namespace SfPlayground.Services.Interfaces;
+﻿namespace SfPlayground.Services.Interfaces;
 
 public interface IGridStateService
 {

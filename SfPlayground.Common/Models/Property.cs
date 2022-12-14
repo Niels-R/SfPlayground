@@ -1,7 +1,7 @@
 ﻿using System.Text.Json.Serialization;
-using SfPlayground.Helpers;
+using SfPlayground.Common.Helpers;
 
-namespace SfPlayground.Models;
+namespace SfPlayground.Common.Models;
 
 public class Property
 {

@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
-using SfPlayground.Models;
+using SfPlayground.Common.Models;
 using Syncfusion.Blazor.Grids;
 
 namespace SfPlayground.Components;
@@ -14,6 +14,7 @@ public partial class SfSubGridComponent : ComponentBase
     private int _gridStateHashCode;
 
     private List<Property>? _projectProperties;
+
     private List<Property> ProjectProperties
     {
         get

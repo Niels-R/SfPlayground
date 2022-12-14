@@ -19,6 +19,13 @@
 	  <Content Update="wwwroot\sample-data\properties.json">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Content>
+	  <Content Update="wwwroot\sample-data\comments.json">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\SfPlayground.Common\SfPlayground.Common.csproj" />
 	</ItemGroup>
 
 </Project>

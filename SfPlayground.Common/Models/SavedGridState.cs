@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace SfPlayground.Models;
+namespace SfPlayground.Common.Models;
 
 public class SavedGridState
 {

@@ -1,6 +1,6 @@
 ﻿using System.Net.Http.Json;
 using Microsoft.AspNetCore.Components;
-using SfPlayground.Models;
+using SfPlayground.Common.Models;
 using Syncfusion.Blazor.Grids;
 
 namespace SfPlayground.Pages;
@@ -17,7 +17,7 @@ public partial class SfGridDemo
     {
         _forecasts = await Http!.GetFromJsonAsync<List<WeatherForecast>>("sample-data/weather.json") ?? new List<WeatherForecast>();
 
-        base.OnInitialized();
+        await base.OnInitializedAsync();
     }
 
     private async Task OnLoadStateClicked()
@@ -33,7 +33,7 @@ public partial class SfGridDemo
     {
         if (_grid != null)
         {
-            var gridState = await Http!.GetStringAsync("sample-data/gridstate.json") ?? null;
+            var gridState = await Http!.GetStringAsync("sample-data/gridstate.json");
 
             await _grid.SetPersistDataAsync(gridState);
             StateHasChanged();

@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components.Web;
-using SfPlayground.Models;
+using SfPlayground.Common.Models;
 
 namespace SfPlayground.Pages;
 

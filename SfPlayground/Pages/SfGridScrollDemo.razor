@@ -1,0 +1,54 @@
+﻿@page "/SfGridScroll"
+@using SfPlayground.Common.Models
+@using Syncfusion.Blazor
+@using Syncfusion.Blazor.Buttons
+@using Syncfusion.Blazor.Data
+@using Syncfusion.Blazor.Grids
+
+<PageTitle>SfGridScrollDemo</PageTitle>
+
+<SfButton
+    @onclick="() => { _isInitialRender = true; }">
+    Set SfManager
+</SfButton>
+
+<hr/>
+
+<SfGrid @ref="_grid"
+        TValue="Comment"
+        AllowReordering="true"
+        AllowResizing="true"
+        AllowSorting="true"
+        EnablePersistence="true"
+        EnableVirtualization="true"
+        EnableVirtualMaskRow="true"
+        Height="500"
+        Width="100%">
+
+    <GridEvents
+        TValue="Comment"
+        Created="CreatedEventHandler"
+        DataBound="DataBoundEventHandler"
+        OnActionBegin="OnActionBeginEventHandler"
+        OnBatchAdd="OnBatchAddEventHandler"
+        OnDataBound="OnDataBoundEventHandler"
+        OnLoad="OnLoadEventHandler"
+        RowDataBound="RowDataBoundEventHandler"/>
+
+
+    @{
+        if (_isInitialRender)
+        {
+            <SfDataManager Adaptor="Adaptors.ODataV4Adaptor"
+                           Url="http://localhost:5126/odata/comments"/>
+        }
+    }
+    <GridColumns>
+        <GridColumn Field="@nameof(Comment.Id)"
+                    Width="75"/>
+        <GridColumn Field="@nameof(Comment.PostId)"
+                    Width="75"/>
+        <GridColumn Field="@nameof(Comment.Name)"/>
+        <GridColumn Field="@nameof(Comment.Email)"/>
+    </GridColumns>
+</SfGrid>

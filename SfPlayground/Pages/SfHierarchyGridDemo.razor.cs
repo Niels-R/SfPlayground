@@ -1,6 +1,6 @@
 ﻿using System.Net.Http.Json;
 using Microsoft.AspNetCore.Components;
-using SfPlayground.Models;
+using SfPlayground.Common.Models;
 using Syncfusion.Blazor.Grids;
 using Action = Syncfusion.Blazor.Grids.Action;
 
@@ -8,7 +8,7 @@ namespace SfPlayground.Pages;
 
 public partial class SfHierarchyGridDemo
 {
-    [Inject] private HttpClient Http { get; set; }
+    [Inject] private HttpClient? Http { get; set; }
 
     private List<Property> _mainProperties = new();
     private List<Property> _properties = new();
