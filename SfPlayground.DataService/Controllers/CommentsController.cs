@@ -13,12 +13,12 @@ public class CommentsController : ODataController
     {
         _comments ??= httpClient.GetFromJsonAsync<List<Comment>>("https://jsonplaceholder.typicode.com/comments").Result ?? new List<Comment>();
     }
-    
+
     [EnableQuery]
     public ActionResult Get()
     {
-        Thread.Sleep(5000);
-        
+        //Thread.Sleep(5000);
+
         return Ok(_comments);
     }
 
@@ -27,8 +27,8 @@ public class CommentsController : ODataController
     {
         var comment = _comments?.SingleOrDefault(x => x.Id == id);
 
-        return comment == null 
-            ? NotFound() 
+        return comment == null
+            ? NotFound()
             : Ok(comment);
     }
 }

@@ -1,0 +1,53 @@
+﻿@page "/RadzenDataGridOData"
+@using SfPlayground.Common.Models
+
+<h3>RadzenDataGridDemo</h3>
+
+<RadzenButton Click="SerializeGridSettings">Serialize GridSettings</RadzenButton>
+<RadzenButton Click="DeserializeGridSettings">Deserialize GridSettings</RadzenButton>
+
+<RadzenDataGrid @ref="_grid"
+                @bind-Settings="_gridSettings"
+                TItem="Comment"
+                AllowFiltering="true"
+                AllowPaging="true"
+                AllowSorting="true"
+                ColumnWidth="200px"
+                Count="_count"
+                Data="_comments"
+                FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                FilterMode="FilterMode.Simple"
+                IsLoading="_isLoading"
+                LoadData="LoadData"
+                PagerHorizontalAlign="HorizontalAlign.Center"
+                PageSize="50"
+                Style="height: calc(100vh - 250px)">
+    <Columns>
+        <RadzenDataGridColumn TItem="Comment"
+                              Property="@nameof(Comment.Id)"
+                              Title="@nameof(Comment.Id)" />
+        <RadzenDataGridColumn TItem="Comment"
+                              FilterOperator="FilterOperator.Contains"
+                              FilterValue="@SelectedPostIds"
+                              LogicalFilterOperator="LogicalFilterOperator.Or"
+                              Property="@nameof(Comment.PostId)"
+                              Title="@nameof(Comment.PostId)"
+                              Type="typeof(IEnumerable<int>)">
+            <FilterTemplate>
+                <RadzenDropDown @bind-Value="SelectedPostIds"
+                                AllowClear="true"
+                                AllowFiltering="true"
+                                Data="PostIds"
+                                FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                                Multiple="true">
+                </RadzenDropDown>
+            </FilterTemplate>
+        </RadzenDataGridColumn>
+        <RadzenDataGridColumn TItem="Comment"
+                              Property="@nameof(Comment.Name)"
+                              Title="@nameof(Comment.Name)" />
+        <RadzenDataGridColumn TItem="Comment"
+                              Property="@nameof(Comment.Email)"
+                              Title="@nameof(Comment.Email)" />
+    </Columns>
+</RadzenDataGrid>

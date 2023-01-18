@@ -1,0 +1,22 @@
+﻿@page "/RadzenDataGrid"
+@using SfPlayground.Common.Models
+
+<h3>RadzenDataGridDemo</h3>
+
+<RadzenDataGrid TItem="WeatherForecast"
+                Data="_forecasts">
+    <Columns>
+        <RadzenDataGridColumn TItem="WeatherForecast"
+                              Property="@nameof(WeatherForecast.Date)"
+                              Title="@nameof(WeatherForecast.Date)"/>
+        <RadzenDataGridColumn TItem="WeatherForecast"
+                              Property="@nameof(WeatherForecast.TemperatureC)"
+                              Title="@nameof(WeatherForecast.TemperatureC)"/>
+        <RadzenDataGridColumn TItem="WeatherForecast"
+                              Property="@nameof(WeatherForecast.TemperatureF)"
+                              Title="@nameof(WeatherForecast.TemperatureF)"/>
+        <RadzenDataGridColumn TItem="WeatherForecast"
+                              Property="@nameof(WeatherForecast.Summary)"
+                              Title="@nameof(WeatherForecast.Summary)"/>
+    </Columns>
+</RadzenDataGrid>

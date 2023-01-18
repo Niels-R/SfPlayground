@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SfPlayground.DataService", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SfPlayground.Common", "SfPlayground.Common\SfPlayground.Common.csproj", "{BBB65E35-C4D8-410F-87A5-9847866853C4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RadzenPlayground", "RadzenPlayground\RadzenPlayground.csproj", "{49583DE4-A6E6-4316-B7FD-230CEC84B323}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{BBB65E35-C4D8-410F-87A5-9847866853C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BBB65E35-C4D8-410F-87A5-9847866853C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BBB65E35-C4D8-410F-87A5-9847866853C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49583DE4-A6E6-4316-B7FD-230CEC84B323}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49583DE4-A6E6-4316-B7FD-230CEC84B323}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49583DE4-A6E6-4316-B7FD-230CEC84B323}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49583DE4-A6E6-4316-B7FD-230CEC84B323}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
